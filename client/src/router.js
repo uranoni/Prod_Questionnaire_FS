@@ -23,6 +23,11 @@ export default new Router({
       path: "/answer",
       name: "answer",
       component: () => import("./views/Answer.vue")
+    },
+    {
+      path: "/manage",
+      name: "manage",
+      component: () => import("./views/Manage.vue")
     }
   ]
 });

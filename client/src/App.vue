@@ -30,7 +30,7 @@ export default {
         { name: "回答問題", path: "/answer" },
         { name: "設計問卷", path: "/answer" },
         { name: "設計問題", path: "/question" },
-        { name: "調整問卷選項", path: "/answer" },
+        { name: "問卷管理", path: "/manage" },
         { name: "視覺呈現", path: "/answer" }
       ]
     };
