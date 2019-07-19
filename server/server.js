@@ -14,6 +14,7 @@ mongoose.connect('mongodb://localhost:27017/questionnaire', function (err) {
 
 var userRouter = require('./api/user.js')
 var listRouter = require('./api/list')
+var questionRouter = require('./api/question')
 
 var app = express();
 app.use(morgan("dev"));
@@ -30,6 +31,7 @@ app.use(express.urlencoded({
 
 app.use('/api/user', userRouter)
 app.use('/api/list', listRouter)
+app.use('/api/question', questionRouter)
 
 app.listen(8000, () => {
     console.log(`http://localhost:8000`);
