@@ -1,72 +1,28 @@
 <template>
-  <v-layout row>
-    <v-flex xs12 sm6 offset-sm3>
-      <v-card>
-        <v-toolbar color="cyan" dark>
-          <v-toolbar-title>
-            <v-btn color="normal">Question</v-btn>
-          </v-toolbar-title>
-          <v-toolbar-title>
-            <v-btn color="normal">Answer</v-btn>
-          </v-toolbar-title>
-          <v-spacer></v-spacer>
-
-          <v-btn icon>
-            <v-icon>search</v-icon>
-          </v-btn>
-        </v-toolbar>
-
-        <v-list two-line>
-          <template v-for="(item, index) in items">
-            <v-subheader v-if="item.header" :key="item.header">{{ item.header }}</v-subheader>
-
-            <v-divider v-else-if="item.divider" :key="index" :inset="item.inset"></v-divider>
-
-            <v-list-tile v-else :key="item.title" avatar @click>
-              <v-list-tile-avatar>
-                <img :src="item.avatar" />
-              </v-list-tile-avatar>
-
-              <v-list-tile-content>
-                <v-list-tile-title v-html="item.title"></v-list-tile-title>
-                <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </template>
-        </v-list>
-      </v-card>
-    </v-flex>
-  </v-layout>
+  <dir>
+    <pre>
+    {{list}}
+  </pre>
+  </dir>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      items: [
-        { header: "現在位置" },
-        {
-          avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-          title: "Brunch this weekend?",
-          subtitle:
-            "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
-        },
-        { divider: true, inset: true },
-        {
-          avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-          title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
-          subtitle:
-            "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend."
-        },
-        { divider: true, inset: true },
-        {
-          avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
-          title: "Oui oui",
-          subtitle:
-            "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?"
-        }
-      ]
+      list: []
     };
+  },
+  mounted() {
+    axios
+      .get("/api/list/allItem/5d3141ba7082fc5de46686fd", {})
+      .then(response => {
+        // console.log(response.data[0]);
+        this.list = response.data[0];
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   }
 };
 </script>
