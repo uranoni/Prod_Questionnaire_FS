@@ -3,24 +3,30 @@ const _ = require('lodash');
 const { List } = require('../model/List');
 const { User } = require('../model/User');
 const { Question } = require('../model/Question');
+const { Option } = require('../model/Option');
 const { ObjectID } = require('mongodb')
 
-const questionRouter = express.Router();
+const optionRouter = express.Router();
 
-questionRouter.post('/create', async (req, res) => {
-    var body = _.pick(req.body, ['Qname', 'description', 'is_root'])
-
+optionRouter.post('/create', async (req, res) => {
+    var body = _.pick(req.body, ['option_name', 'description'])
+    var next = []
+    next.push(req.body.question_id)
     try {
         var list = await List.findOne({ list_name: req.body.list_name })
     } catch (error) {
         console.log(error)
         res.status(404)
     }
-    var question = new Question(body);
+    var option = new Option({
+        option_name: body.option_name,
+        description: body.description,
+        next: next
+    });
     if (list) {
         try {
-            const result = await question.save();
-            list.question.push(result._id)
+            const result = await option.save();
+            list.option.push(result._id)
             await list.save();
             res.send(result)
         } catch (error) {
@@ -32,4 +38,4 @@ questionRouter.post('/create', async (req, res) => {
 
 
 
-module.exports = questionRouter;
+module.exports = optionRouter;

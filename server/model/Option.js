@@ -9,9 +9,7 @@ const OptionSchema = new mongoose.Schema({
         type: String
     },
     next: [{
-        question_id: {
-            type: Schema.Types.ObjectId, ref: 'Question'
-        }
+        type: Schema.Types.ObjectId, ref: 'Question'
     }],
     picture: String,
     video: String,
