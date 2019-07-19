@@ -14,7 +14,10 @@ const Path = new mongoose.Schema({
             item_type: { type: Schema.Types.ObjectId },
             item_id: { type: Schema.Types.ObjectId }
         }
-    ]
+    ],
+    feed_back:[{
+        type:String
+    }]
 
 
 });
