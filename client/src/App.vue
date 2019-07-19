@@ -24,10 +24,14 @@
 export default {
   name: "App",
   components: {},
+  mounted() {
+    this.$store.dispatch("fetchProfile");
+  },
   data() {
     return {
       navlist: [
         { name: "回答問題", path: "/answer" },
+        { name: "關於我", path: "/about" },
         { name: "設計問卷", path: "/answer" },
         { name: "設計問題", path: "/question" },
         { name: "問卷管理", path: "/manage" },

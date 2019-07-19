@@ -19,9 +19,10 @@ userRouter.post('/signup', async (req, res) => {
     }
 });
 
-userRouter.get('/ownerList', async (req, res) => {
-    var body = _.pick(req.body, ['_id'])
-    const list = await User.find({ _id: body._id }).populate('questionList')
+userRouter.get('/ownerList/:id', async (req, res) => {
+    var _id = req.params.id;
+    console.log(_id)
+    const list = await User.find({ _id: _id }).populate('questionList')
     console.log(list)
     res.send(list)
 });
