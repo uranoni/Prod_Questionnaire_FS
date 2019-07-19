@@ -1,15 +1,12 @@
 const mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 const validator = require('validator');
 const isEmail = require('validator/lib/isEmail')
 const dayjs = require('dayjs')
 const _ = require('lodash')
-const uuidv4 = require('uuid/v4');
-
+// const uuidv4 = require('uuid/v4');
+const List = require('../model/List');
 const UserSchema = new mongoose.Schema({
-    id: {
-        type: String,
-        default: uuidv4()
-    },
     email: {
         type: String,
         required: true,
@@ -30,6 +27,8 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    age: { type: String },
+    hobby: [{ type: String }],
     tokens: [{
         token: {
             type: String
@@ -38,17 +37,17 @@ const UserSchema = new mongoose.Schema({
     questionList: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Book'
+            ref: 'List'
         }
     ],
     answerPath: [
         {
-            pathid: String
+            type: Schema.Types.ObjectId,
+            ref: 'Path'
         }
     ],
     createAt: {
-        type: String,
-        default: dayjs().format('YYYY-MM-DD HH:mm:ss')
+        type: Date,
     }
 })
 
