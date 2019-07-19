@@ -35,7 +35,8 @@ export default {
         { name: "設計問卷", path: "/answer" },
         { name: "設計問題", path: "/question" },
         { name: "問卷管理", path: "/manage" },
-        { name: "視覺呈現", path: "/answer" }
+        { name: "視覺呈現", path: "/answer" },
+        { name: "登入", path: "/login" }
       ]
     };
   }
