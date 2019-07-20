@@ -25,7 +25,15 @@ export default {
   name: "App",
   components: {},
   mounted() {
-    this.$store.dispatch("fetchProfile");
+      const  nowToken = localStorage.getItem('Authorization');
+      console.log(nowToken)
+      if (nowToken){
+        this.navlist.splice(6,1)
+      }
+      else{
+        
+      }
+
   },
   data() {
     return {

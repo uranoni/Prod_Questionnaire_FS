@@ -7,7 +7,7 @@
             <v-toolbar-title>Login form</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-tooltip bottom>
-              <v-btn icon large :href="source" target="_blank" slot="activator">
+              <v-btn icon large target="_blank" slot="activator">
                 <v-icon large>code</v-icon>
               </v-btn>
               <span>Source</span>
@@ -34,7 +34,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary">Login</v-btn>
+            <v-btn color="primary" @click="login">Login</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -51,8 +51,25 @@ export default {
     };
   },
   methods: {
-    
-  },
+    login() {
+      axios
+        .post("user/signup", {
+          email: this.email,
+          password: this.password
+        })
+        .then(response => {
+        //   console.log(this.$router);
+          this.$store.commit("setProfile", response.data);
+          const token = response.data.tokens[response.data.tokens.length - 1];
+        //   console.log(token)
+          localStorage.setItem("Authorization", token.token);
+          this.$router.push("/about");
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  }
 };
 </script>
 
