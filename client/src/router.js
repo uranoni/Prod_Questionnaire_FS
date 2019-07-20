@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-
+import Loading from "./components/Loading";
 Vue.use(Router);
 
 export default new Router({
@@ -20,9 +20,14 @@ export default new Router({
       component: () => import("./views/Question.vue")
     },
     {
-      path: "/answer",
+      path: "/alllist",
       name: "answer",
-      component: () => import("./views/Answer.vue")
+      component: () => import("./views/AllList.vue")
+    },
+    {
+      path: "/answer/:id",
+      name: "answer",
+      component: () => import("./components/Answer.vue")
     },
     {
       path: "/manage",

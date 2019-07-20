@@ -41,4 +41,10 @@ listRouter.get("/allItem/:id", async (req, res) => {
   res.send(list);
 });
 
+listRouter.get("/openlist", async (req, res) => {
+  const list = await List.find().populate({ path: "author", select: "name" });
+  console.log(list);
+  res.send(list);
+});
+
 module.exports = listRouter;

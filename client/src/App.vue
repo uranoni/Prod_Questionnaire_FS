@@ -25,20 +25,17 @@ export default {
   name: "App",
   components: {},
   mounted() {
-      const  nowToken = localStorage.getItem('Authorization');
-      console.log(nowToken)
-      if (nowToken){
-        this.navlist.splice(6,1)
-      }
-      else{
-        
-      }
-
+    const nowToken = localStorage.getItem("Authorization");
+    console.log(nowToken);
+    if (nowToken) {
+      this.navlist.splice(6, 1);
+    } else {
+    }
   },
   data() {
     return {
       navlist: [
-        { name: "回答問題", path: "/answer" },
+        { name: "回答問題", path: "/allList" },
         { name: "關於我", path: "/about" },
         { name: "設計問卷", path: "/answer" },
         { name: "設計問題", path: "/question" },

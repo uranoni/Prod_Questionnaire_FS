@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    {{$route.params.id}}
     <v-layout row>
       <v-flex xs12 md5>
         <Card title="森林" text="森林風景區" src="https://picsum.photos/id/1023/3955/2094"></Card>
