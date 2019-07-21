@@ -5,13 +5,20 @@
         <span class="font-weight-light">問卷系統</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn
-        small
-        v-for="(nav,idx) in navlist"
-        color="normal"
-        :to="nav.path"
-        :key="idx"
-      >{{nav.name}}</v-btn>
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn v-for="(nav,idx) in navlist" :to="nav.path" :key="idx" flat>{{nav.name}}</v-btn>
+      </v-toolbar-items>
+
+      <v-menu class="hidden-md-and-up">
+        <v-toolbar-side-icon slot="activator"></v-toolbar-side-icon>
+        <v-list>
+          <v-list-tile v-for="(nav,idx) in navlist" :key="idx">
+            <v-list-tile-content>
+              <v-btn :to="nav.path" :key="idx" flat>{{nav.name}}</v-btn>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
     </v-toolbar>
 
     <v-content>
@@ -27,7 +34,6 @@ export default {
   components: {},
   mounted() {
     const nowToken = localStorage.getItem("Authorization");
-    console.log(nowToken);
     if (nowToken) {
       this.navlist.splice(6, 1);
     } else {
