@@ -1,25 +1,19 @@
 <template>
   <v-container>
-    {{$route.params.id}}
-    <v-layout row>
-      <v-flex xs12 md5>
-        <Card title="森林" text="森林風景區" src="https://picsum.photos/id/1023/3955/2094"></Card>
-      </v-flex>
-      <v-flex xs12 md2></v-flex>
-      <v-flex xs12 md5>
-        <Card title="岩石區" text="岩石風景區" src="https://picsum.photos/id/1016/3844/2563"></Card>
+    <v-layout>
+      <v-flex x12 md6>
+        <h1>{{Qname}}</h1>
+        <h3>{{description}}</h3>
       </v-flex>
     </v-layout>
-
-    <br />
-
-    <v-layout row>
-      <v-flex xs12 md5>
-        <Card title="丘陵" text="丘陵風景區" src="https://picsum.photos/id/1018/3914/2935"></Card>
-      </v-flex>
-      <v-flex xs12 md2></v-flex>
-      <v-flex xs12 md5>
-        <Card title="海洋" text="海洋風景區" src="https://picsum.photos/id/1019/5472/3648"></Card>
+    <v-layout row justify-center>
+      <v-flex xs12 md6 v-for="(option,index) in option" :key="index">
+        <Card
+          :title="option.option_name"
+          :text="option.description"
+          src="https://picsum.photos/id/1023/3955/2094"
+        ></Card>
+        <v-spacer></v-spacer>
       </v-flex>
     </v-layout>
   </v-container>
@@ -27,13 +21,42 @@
 
 <script>
 import Card from "@/components/Card.vue";
-
+import { mapActions } from "vuex";
 export default {
   name: "Helloworld",
   components: {
     Card
   },
-  data: () => ({})
+  mounted() {
+    if (this.$store.state.nowPath.length == 0) {
+      axios
+        .get(`list/rootque/${this.$store.state.nowListID}`, {})
+        .then(response => {
+          const res = response.data.question[0];
+          this.Qname = res.Qname;
+          this.description = res.description;
+          this.option = res.ans_option;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
+  },
+  created() {
+    this.fetchList();
+  },
+  data: () => {
+    return {
+      Qname: "",
+      description: "",
+      option: []
+    };
+  },
+  methods: {
+    ...mapActions({
+      fetchList: "fetchNowList"
+    })
+  }
 };
 </script>
 

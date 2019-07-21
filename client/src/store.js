@@ -8,9 +8,11 @@ export default new Vuex.Store({
     userProfile: {},
     questionList: [],
 
+    nowListID: "",
+    nowList: {},
     nowQList: [],
-    nowQStatus: {},
     nowAList: [],
+    nowPath: [],
 
     designQList: [],
     designQStatus: {},
@@ -22,20 +24,45 @@ export default new Vuex.Store({
     // },
     setProfile(state, profile) {
       state.userProfile = profile;
+    },
+    setNowListID(state, payload) {
+      state.nowListID = payload;
+    },
+    setNowList(state, list) {
+      state.nowList = list;
+    },
+    addPath(state, payload) {
+      state.nowPath.push(payload);
     }
   },
   actions: {
-    // fetchProfile({ commit }) {
-    //   axios
-    //     .get("/api/user/ownerList/5d312e9c96be4146f02bdb8d", {})
-    //     .then(response => {
-    //       // console.log(response.data[0]);
-    //       const profile = response.data[0];
-    //       commit("setProfile", profile);
-    //     })
-    //     .catch(function(error) {
-    //       console.log(error);
-    //     });
-    // }
+    fetchProfile({ commit }) {
+      console.log(localStorage.getItem("authorization"));
+      axios
+        .get("user/me", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("Authorization")
+          }
+        })
+        .then(response => {
+          const profile = response.data;
+          commit("setProfile", profile);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    fetchNowList({ commit, state }) {
+      // console.log(`${state.nowListID}`);
+      axios
+        .get(`list/allItem/${state.nowListID}`)
+        .then(response => {
+          const list = response.data;
+          commit("setNowList", list);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
   }
 });

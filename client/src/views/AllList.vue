@@ -25,26 +25,6 @@ export default {
         { text: "作者", value: "author" },
         { text: "連結", value: "link" }
       ],
-      //   desserts: [
-      //     {
-      //       name: "Frozen Yogurt",
-      //       description: 159,
-      //       author: 6.0,
-      //       link: 24
-      //     },
-      //     {
-      //       name: "Ice cream sandwich",
-      //       description: 237,
-      //       author: 9.0,
-      //       link: 37
-      //     },
-      //     {
-      //       name: "Eclair",
-      //       description: 262,
-      //       author: 16.0,
-      //       link: 23
-      //     }
-      //   ]
       questions: []
     };
   },
@@ -62,6 +42,7 @@ export default {
   },
   methods: {
     goto(id) {
+      this.$store.commit("setNowListID", id);
       this.$router.push(`/answer/${id}`);
     }
   }

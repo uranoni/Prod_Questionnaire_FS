@@ -33,7 +33,7 @@ listRouter.post("/create", auth, async (req, res) => {
 listRouter.get("/allItem/:id", async (req, res) => {
   var _id = req.params.id;
   console.log(_id);
-  const list = await List.find({ _id: _id })
+  const list = await List.findOne({ _id: _id })
     // .populate('author')
     .populate({ path: "question", select: "Qname" })
     .populate({ path: "option", select: "option_name next" });
@@ -43,6 +43,19 @@ listRouter.get("/allItem/:id", async (req, res) => {
 
 listRouter.get("/openlist", async (req, res) => {
   const list = await List.find().populate({ path: "author", select: "name" });
+  console.log(list);
+  res.send(list);
+});
+
+listRouter.get("/rootque/:id", async (req, res) => {
+  var _id = req.params.id;
+  const list = await List.findOne({ _id }).populate({
+    path: "question",
+    match: { is_root: { $gte: true } },
+    populate: {
+      path: "ans_option"
+    }
+  });
   console.log(list);
   res.send(list);
 });

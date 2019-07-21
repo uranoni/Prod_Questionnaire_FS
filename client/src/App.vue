@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "App",
   components: {},
@@ -32,18 +33,26 @@ export default {
     } else {
     }
   },
+  created() {
+    this.fetchProfile();
+  },
   data() {
     return {
       navlist: [
         { name: "回答問題", path: "/allList" },
         { name: "關於我", path: "/about" },
-        { name: "設計問卷", path: "/answer" },
+        { name: "設計問卷", path: "/design" },
         { name: "設計問題", path: "/question" },
         { name: "問卷管理", path: "/manage" },
         { name: "視覺呈現", path: "/answer" },
         { name: "登入", path: "/login" }
       ]
     };
+  },
+  methods: {
+    ...mapActions({
+      fetchProfile: "fetchProfile"
+    })
   }
 };
 </script>

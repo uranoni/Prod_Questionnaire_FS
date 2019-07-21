@@ -53,11 +53,12 @@ userRouter.get("/ownerList", auth, async (req, res) => {
 });
 
 userRouter.get("/me", auth, async (req, res) => {
+  console.log(req.user);
   const data = { ...req.user._doc };
   delete data.tokens;
   delete data.password;
 
-  console.log(data);
+  // console.log(data);
   res.send(data);
 });
 module.exports = userRouter;

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <pre>
-    {{profile}}
-</pre>
+    <h1>{{profile.name}}</h1>
+    <h1>{{profile.age}}</h1>
+    <h1>{{profile.email}}</h1>
   </div>
 </template>
 
@@ -10,7 +10,6 @@
 export default {
   computed: {
     profile() {
-      console.log(this.$store.state);
       return this.$store.state.userProfile;
     }
   }

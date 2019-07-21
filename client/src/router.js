@@ -43,6 +43,25 @@ export default new Router({
       path: "/login",
       name: "login",
       component: () => import("./views/Login.vue")
+    },
+    {
+      path: "/design",
+      name: "design",
+      component: () => import("./views/Design.vue"),
+      children: [
+        {
+          path: "list",
+          component: () => import("./components/DesignList.vue")
+        },
+        {
+          path: "option",
+          component: () => import("./components/DesignOption.vue")
+        },
+        {
+          path: "question",
+          component: () => import("./components/DesignQuestion.vue")
+        }
+      ]
     }
   ]
 });
