@@ -25,7 +25,7 @@ export default new Router({
       component: () => import("./views/AllList.vue")
     },
     {
-      path: "/answer/:id",
+      path: "/answer/:id?",
       name: "answer",
       component: () => import("./components/Answer.vue")
     },

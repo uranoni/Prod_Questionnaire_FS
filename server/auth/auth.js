@@ -1,7 +1,7 @@
 const User = require("../model/User");
 
 const authMiddleware = async (req, res, next) => {
-  // console.log(req.header('Authorization'))
+  console.log(req.headers);
 
   if (!req.header("Authorization"))
     return res.status(401).send({ message: "請設定token!" });

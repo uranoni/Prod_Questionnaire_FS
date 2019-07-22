@@ -12,6 +12,7 @@
           :title="option.option_name"
           :text="option.description"
           src="https://picsum.photos/id/1023/3955/2094"
+          @click.native="call"
         ></Card>
         <v-spacer></v-spacer>
       </v-flex>
@@ -30,7 +31,8 @@ export default {
   mounted() {
     if (this.$store.state.nowPath.length == 0) {
       axios
-        .get(`list/rootque/${this.$store.state.nowListID}`, {})
+        // .get(`list/rootque/${this.$store.state.nowListID}`, {})
+        .get(`list/rootque/${this.$route.params.id}`, {})
         .then(response => {
           const res = response.data.question[0];
           this.Qname = res.Qname;
@@ -55,7 +57,10 @@ export default {
   methods: {
     ...mapActions({
       fetchList: "fetchNowList"
-    })
+    }),
+    call() {
+      console.log("qwe");
+    }
   }
 };
 </script>

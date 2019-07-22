@@ -2,10 +2,10 @@
   <v-data-table :headers="headers" :items="questions" hide-actions>
     <template v-slot:items="props">
       <td>{{ props.item.list_name }}</td>
-      <td class="text-xs-right">{{ props.item.description }}</td>
-      <td class="text-xs-right">{{ props.item.author.name }}</td>
-      <td class="text-xs-right">
-        <v-btn default @click="goto(props.item._id)">點擊</v-btn>
+      <td>{{ props.item.description }}</td>
+      <td>{{ props.item.author.name }}</td>
+      <td>
+        <v-btn color="primary" @click="goto(props.item._id)">點擊</v-btn>
       </td>
     </template>
   </v-data-table>

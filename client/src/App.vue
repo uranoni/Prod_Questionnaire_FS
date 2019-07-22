@@ -35,7 +35,7 @@ export default {
   mounted() {
     const nowToken = localStorage.getItem("Authorization");
     if (nowToken) {
-      this.navlist.splice(6, 1);
+      this.navlist.splice(6, 1, { name: "登出", path: "/logout" });
     } else {
     }
   },

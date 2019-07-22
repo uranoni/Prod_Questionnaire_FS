@@ -9,6 +9,7 @@ const listRouter = express.Router();
 
 listRouter.post("/create", auth, async (req, res) => {
   var body = _.pick(req.body, ["list_name", "description"]);
+  console.log(req.body);
   body.author = req.user._id;
   try {
     var user = await User.findOne({ _id: req.user._id });
