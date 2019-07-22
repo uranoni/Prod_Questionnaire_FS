@@ -42,6 +42,19 @@ listRouter.get("/allItem/:id", async (req, res) => {
   res.send(list);
 });
 
+listRouter.get("/ownerlist", auth, async (req, res) => {
+  try {
+    const list = await List.find({ author: req.user._id });
+    if (list.length == 0) {
+      res.send("尚未新增問卷");
+    } else {
+      res.send(list);
+    }
+  } catch (error) {
+    res.send(error);
+  }
+});
+
 listRouter.get("/openlist", async (req, res) => {
   const list = await List.find().populate({ path: "author", select: "name" });
   console.log(list);
