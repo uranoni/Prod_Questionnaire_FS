@@ -15,7 +15,7 @@
                 <v-text-field label="描述*" type="text" required v-model="description"></v-text-field>
               </v-flex>
               <v-flex>
-                <v-checkbox v-model="is_root" :label="`是否為根問題 ${is_root.toString()}`"></v-checkbox>
+                <v-checkbox v-model="root" :label="`是否為根問題 ${root.toString()}`"></v-checkbox>
               </v-flex>
             </v-layout>
           </v-container>
@@ -41,7 +41,8 @@ export default {
     dialog: false,
     Qname: "",
     description: "",
-    is_root: "false"
+    root: ""
+    // is_root: "false"
   }),
   methods: {
     closedialog() {
@@ -56,7 +57,7 @@ export default {
             Qname: this.Qname,
             description: this.description,
             _id: this.listID,
-            is_root: this.is_root
+            is_root: this.root
           },
           {
             headers: {
