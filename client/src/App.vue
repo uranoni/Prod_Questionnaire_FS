@@ -37,6 +37,7 @@ export default {
     if (nowToken) {
       this.navlist.splice(6, 1, { name: "登出", path: "/logout" });
     } else {
+      this.$router.push("/login");
     }
   },
   created() {
@@ -48,7 +49,7 @@ export default {
         { name: "回答問題", path: "/allList" },
         { name: "關於我", path: "/about" },
         { name: "設計問卷", path: "/design" },
-        { name: "設計問題", path: "/question" },
+        { name: "佔留" },
         { name: "問卷管理", path: "/manage" },
         { name: "視覺呈現", path: "/answer" },
         { name: "登入", path: "/login" }

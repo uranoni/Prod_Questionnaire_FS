@@ -16,7 +16,7 @@
           <v-card-text>
             <v-form>
               <v-text-field
-                prepend-icon="person"
+                prepend-icon="email"
                 name="login"
                 label="Login"
                 type="text"
@@ -29,6 +29,14 @@
                 id="password"
                 type="password"
                 v-model="password"
+              ></v-text-field>
+              <v-text-field
+                prepend-icon="person"
+                name="password"
+                label="Password"
+                id="password"
+                type="text"
+                v-model="name"
               ></v-text-field>
             </v-form>
           </v-card-text>
@@ -47,7 +55,8 @@ export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      name: ""
     };
   },
   methods: {
@@ -55,13 +64,12 @@ export default {
       axios
         .post("user/signup", {
           email: this.email,
-          password: this.password
+          password: this.password,
+          name: this.name
         })
         .then(response => {
-        //   console.log(this.$router);
           this.$store.commit("setProfile", response.data);
           const token = response.data.tokens[response.data.tokens.length - 1];
-        //   console.log(token)
           localStorage.setItem("Authorization", token.token);
           this.$router.push("/about");
         })

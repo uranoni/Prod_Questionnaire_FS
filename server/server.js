@@ -3,14 +3,10 @@ const mongoose = require('mongoose');
 const morgan = require("morgan");
 const cors = require("cors");
 
-mongoose.connect('mongodb://localhost:27017/questionnaire', function (err) {
-    if (err) {
-        console.log('Connection error');
-    }
-}, {
-        useCreateIndex: true,
-        useNewUrlParser: true
-    });
+mongoose.connect('mongodb://localhost:27017/questionnaire', {
+    useCreateIndex: true,
+    useNewUrlParser: true
+});
 
 var userRouter = require('./api/user.js')
 var listRouter = require('./api/list')

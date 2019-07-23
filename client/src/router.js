@@ -14,11 +14,11 @@ export default new Router({
     //   component: Home
     // },
 
-    {
-      path: "/question",
-      name: "question",
-      component: () => import("./views/Question.vue")
-    },
+    // {
+    //   path: "/question",
+    //   name: "question",
+    //   component: () => import("./views/Question.vue")
+    // },
     {
       path: "/alllist",
       name: "answer",

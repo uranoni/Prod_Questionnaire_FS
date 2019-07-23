@@ -3,16 +3,19 @@
     <v-dialog :value="dialog" persistent max-width="600px">
       <v-card>
         <v-card-title>
-          <span class="headline">新增問卷</span>
+          <span class="headline">新增問題</span>
         </v-card-title>
         <v-card-text>
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12>
-                <v-text-field label="問卷標題*" required v-model="list_name"></v-text-field>
+                <v-text-field label="問題標題*" required v-model="Qname"></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <v-text-field label="描述*" type="text" required v-model="description"></v-text-field>
+              </v-flex>
+              <v-flex>
+                <v-checkbox v-model="is_root" :label="`是否為根問題 ${is_root.toString()}`"></v-checkbox>
               </v-flex>
             </v-layout>
           </v-container>
@@ -23,7 +26,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" flat @click="closedialog">Close</v-btn>
-          <v-btn color="blue darken-1" flat @click="create_list">Save</v-btn>
+          <v-btn color="blue darken-1" flat @click="create_question">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -32,25 +35,28 @@
 
 <script>
 export default {
-  name: "CreateList",
-  props: ["open"],
+  name: "CreateQuestion",
+  props: ["open", "listID"],
   data: () => ({
     dialog: false,
-    list_name: "",
-    description: ""
+    Qname: "",
+    description: "",
+    is_root: "false"
   }),
   methods: {
     closedialog() {
       this.dialog = false;
       this.$emit("changestatus", false);
     },
-    create_list() {
+    create_question() {
       axios
         .post(
-          "list/create",
+          "question/create",
           {
-            list_name: this.list_name,
-            description: this.description
+            Qname: this.Qname,
+            description: this.description,
+            _id: this.listID,
+            is_root: this.is_root
           },
           {
             headers: {

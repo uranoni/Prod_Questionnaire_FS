@@ -4,14 +4,14 @@ const { List } = require('../model/List');
 const { User } = require('../model/User');
 const { Question } = require('../model/Question');
 const { ObjectID } = require('mongodb')
-
+const auth = require("../auth/auth");
 const questionRouter = express.Router();
 
-questionRouter.post('/create', async (req, res) => {
+questionRouter.post('/create', auth, async (req, res) => {
     var body = _.pick(req.body, ['Qname', 'description', 'is_root'])
-
+    console.log(req.body._id)
     try {
-        var list = await List.findOne({ list_name: req.body.list_name })
+        var list = await List.findOne({ _id: req.body._id })
     } catch (error) {
         console.log(error)
         res.status(404)
