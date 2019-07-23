@@ -15,6 +15,7 @@ optionRouter.post("/create", async (req, res) => {
     "is_end",
     "url_path"
   ]);
+  var keywords = req.body.keywords;
   var next = [];
   next.push(req.body.question_id);
   try {
@@ -28,7 +29,8 @@ optionRouter.post("/create", async (req, res) => {
     description: body.description,
     is_end: body.is_end,
     url_path: body.url_path,
-    next: next
+    next: next,
+    keywords:keywords
   });
   if (list) {
     try {
