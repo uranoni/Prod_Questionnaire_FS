@@ -3,21 +3,25 @@ const Question = require("./Question");
 var Schema = mongoose.Schema;
 const OptionSchema = new mongoose.Schema({
   option_name: String,
-  description:  String,
-  next: [
+  description: String,
+  original_que: {
+    type: Schema.Types.ObjectId,
+    ref: "Question"
+  },
+  next_que: {
+    type: Schema.Types.ObjectId,
+    ref: "Question"
+  },
+  keywords: [
     {
-      type: Schema.Types.ObjectId,
-      ref: "Question"
+      type: String,
+      trim: true
     }
   ],
-  keywords: [{
-    type: String,
-    trim: true
-  }],
-  media_type: { type:String,enum: ['video', 'article','picture'] },
+  media_type: { type: String, enum: ["video", "article", "picture"] },
   media_path: String,
-  is_end: Boolean,
-  
+  redirect_url: String,
+  is_end: Boolean
 });
 
 const Option = mongoose.model("Option", OptionSchema);
