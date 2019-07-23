@@ -32,9 +32,9 @@
               ></v-text-field>
               <v-text-field
                 prepend-icon="person"
-                name="password"
-                label="Password"
-                id="password"
+                name="name"
+                label="name"
+                id="name"
                 type="text"
                 v-model="name"
               ></v-text-field>

@@ -62,6 +62,7 @@ export default {
       questions: []
     };
   },
+
   mounted() {
     axios
       .get("list/ownerlist", {
