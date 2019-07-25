@@ -9,7 +9,7 @@
           <v-toolbar-title>建立選項</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
-            <v-btn dark flat @click="closedialog">Save</v-btn>
+            <v-btn dark flat @click="createOption">Save</v-btn>
           </v-toolbar-items>
         </v-toolbar>
         <v-list three-line subheader>
@@ -64,51 +64,72 @@
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
+
         <v-layout row>
           <v-flex xs2 md2>
             <v-list-tile-title>選項名稱</v-list-tile-title>
           </v-flex>
           <v-flex xs10 md10>
-            <v-text-field label="選項名稱" Regular></v-text-field>
+            <v-text-field label="選項名稱" Regular v-model="optionTitle"></v-text-field>
           </v-flex>
         </v-layout>
-
         <v-flex xs12 md6>請輸入兩組關鍵字(可輸入完使用tab建立關鍵字)</v-flex>
         <v-flex xs12 md6>
           <v-combobox v-model="keyselect" :items="keyselect" label="使用關鍵字" multiple chips></v-combobox>
         </v-flex>
+        <v-flex xs12 sm6 d-flex>
+          <v-select v-model="selectdata" :items="mediaType" label="媒體型態"></v-select>
+        </v-flex>
+        <Media />
       </v-card>
     </v-dialog>
   </v-layout>
 </template>
 
 <script>
+import Media from "./Media";
 export default {
   name: "CreateQuestion",
+  components: {
+    Media
+  },
   props: ["open", "listid", "listque"],
   data: () => ({
+    optionTitle: "",
     original_que: {},
     next_que: {},
     dialog: false,
     is_end: false,
     keyselect: [],
-    keyitems: []
+    keyitems: [],
+    mediaType: ["video", "picture", "article"],
+    selectdata: ""
   }),
-  mounted() {
-    // console.log(this.listdata);
-    // axios
-    //   .get(`list/allItem/${this.listID}`)
-    //   .then(res => {
-    //     this.fetchque = this.res.data.question;
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-  },
+  mounted() {},
   methods: {
     closedialog() {
       this.dialog = false;
       this.$emit("changestatus", false);
+    },
+    createOption() {
+      axios
+        .post("option/create", {
+          option_name: this.optionTitle,
+          original_que: this.original_que,
+          next_que: this.next_que,
+          list_id: this.listid,
+          is_end: this.is_end,
+          keywords: this.keyselect,
+          media_type: this.selectdata
+        })
+        .then(response => {
+          this.closedialog();
+          console.log(response);
+        })
+        .catch(err => {
+          console.log(err);
+          this.closedialog();
+        });
     }
   },
   watch: {
@@ -116,7 +137,17 @@ export default {
       this.dialog = val;
       console.log(this.dialog);
     },
+    //next que和original que為監看當前id
+
+    next_que(val) {
+      console.log(val);
+    },
+    // 監看清單資料
     listdata(val) {
+      console.log(val);
+    },
+    // 監看選擇value
+    selectdata(val) {
       console.log(val);
     }
   }

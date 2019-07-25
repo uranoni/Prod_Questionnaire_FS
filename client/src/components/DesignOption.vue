@@ -13,7 +13,6 @@
           return-object
           outline
         ></v-select>
-        <h1>{{select._id}}</h1>
       </v-flex>
       <v-flex class="good">
         <v-btn color="primary" dark @click="showdialog">
@@ -55,6 +54,7 @@
 
 <script>
 import CreateOption from "./CreateOption";
+
 export default {
   components: {
     CreateOption
