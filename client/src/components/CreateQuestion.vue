@@ -41,8 +41,7 @@ export default {
     dialog: false,
     Qname: "",
     description: "",
-    root: ""
-    // is_root: "false"
+    root: false
   }),
   methods: {
     closedialog() {
@@ -75,6 +74,7 @@ export default {
         });
     }
   },
+  // 監看創建問題清單
   watch: {
     open(val) {
       this.dialog = val;

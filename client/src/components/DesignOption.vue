@@ -22,18 +22,23 @@
         </v-btn>
       </v-flex>
     </v-layout>
-    <CreateOption :open="show" @changestatus="changestatus" :listID="select" />
+    <CreateOption
+      :open="show"
+      @changestatus="changestatus"
+      :listid="pass_listid"
+      :listque="pass_que"
+    />
     <v-layout>
       <v-flex>
         <template>
           <v-expansion-panel>
             <v-expansion-panel-content
-              v-for="(item,i) in option"
+              v-for="(item,i) in alloption"
               :key="i"
               expand-icon="mdi-menu-down"
             >
               <template v-slot:header>
-                <div>{{item.Qname}}</div>
+                <div>{{item.option_name}}</div>
                 <v-spacer></v-spacer>
                 <v-icon v-if="item.is_root == true">done</v-icon>
               </template>
@@ -59,7 +64,9 @@ export default {
       show: false,
       select: {},
       ownerlist: [],
-      option: []
+      alloption: [],
+      pass_que: [],
+      pass_listid: []
     };
   },
   mounted() {
@@ -71,10 +78,10 @@ export default {
       })
       .then(res => {
         this.ownerlist = res.data;
-        console.log(this.ownerlist);
+        // console.log(this.ownerlist);
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
       });
   },
   methods: {
@@ -92,10 +99,12 @@ export default {
         .get(`list/allItem/${val._id}`)
         .then(res => {
           console.log(res);
-          this.option = res.data.option;
+          this.alloption = res.data.option;
+          this.pass_que = res.data.question;
+          this.pass_listid = res.data._id;
         })
         .catch(err => {
-          console.log(err);
+          // console.log(err);
         });
     }
   }
