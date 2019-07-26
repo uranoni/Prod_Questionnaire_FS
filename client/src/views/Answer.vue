@@ -32,9 +32,10 @@ export default {
     if (this.$store.state.nowPath.length == 0) {
       axios
         // .get(`list/rootque/${this.$store.state.nowListID}`, {})
-        .get(`list/rootque/${this.$route.params.id}`, {})
+        .get(`list/allItem/${this.$route.params.id}`, {})
         .then(response => {
           const res = response.data.question[0];
+          console.log(response.data.question);
           this.Qname = res.Qname;
           this.description = res.description;
           this.option = res.ans_option;
