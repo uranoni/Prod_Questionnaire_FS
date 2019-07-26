@@ -27,7 +27,7 @@ export default new Router({
     {
       path: "/answer/:id?",
       name: "answer",
-      component: () => import("./components/Answer.vue")
+      component: () => import("./views/Answer.vue")
     },
     {
       path: "/manage",

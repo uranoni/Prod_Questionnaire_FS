@@ -13,10 +13,6 @@ export default new Vuex.Store({
     nowQList: [],
     nowAList: [],
     nowPath: [],
-
-    designQList: [],
-    designQStatus: {},
-    designAList: []
   },
   mutations: {
     // setProfile(state, profile) {
@@ -48,7 +44,7 @@ export default new Vuex.Store({
           const profile = response.data;
           commit("setProfile", profile);
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -60,7 +56,7 @@ export default new Vuex.Store({
           const list = response.data;
           commit("setNowList", list);
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     }
