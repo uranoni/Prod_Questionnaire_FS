@@ -65,7 +65,7 @@
           </v-list-tile>
         </v-list>
 
-        <v-layout row>
+        <v-layout row justify-center>
           <v-flex xs2 md2>
             <v-list-tile-title>選項名稱</v-list-tile-title>
           </v-flex>
