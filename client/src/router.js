@@ -45,6 +45,11 @@ export default new Router({
       component: () => import("./views/Login.vue")
     },
     {
+      path: "/result",
+      name: "result",
+      component: () => import("./views/Result.vue")
+    },
+    {
       path: "/design",
       name: "design",
       component: () => import("./views/Design.vue"),

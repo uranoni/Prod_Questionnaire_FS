@@ -32,4 +32,14 @@ questionRouter.post("/create", auth, async (req, res) => {
   res.status(404).send("can't find list");
 });
 
+questionRouter.get("/detail/:id", async (req, res) => {
+  var _id = req.params.id;
+  try {
+    var question = await Question.findOne({ _id }).populate("ans_option");
+    console.log(question);
+    return res.send(question);
+  } catch (error) {
+    return res.status(404).send(error);
+  }
+});
 module.exports = questionRouter;

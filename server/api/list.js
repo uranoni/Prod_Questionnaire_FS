@@ -35,9 +35,9 @@ listRouter.get("/allItem/:id", async (req, res) => {
   var _id = req.params.id;
   console.log(_id);
   const list = await List.findOne({ _id: _id })
-    // .populate('author')
     .populate({ path: "question", select: "Qname description is_root" })
     .populate({ path: "option", select: "option_name next" });
+
   console.log(list);
   res.send(list);
 });
