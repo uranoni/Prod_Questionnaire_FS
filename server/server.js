@@ -12,6 +12,7 @@ var userRouter = require('./api/user.js')
 var listRouter = require('./api/list')
 var questionRouter = require('./api/question')
 var optionRouter = require('./api/option')
+var pathRouter = require('./api/path.js')
 
 var app = express();
 app.use(morgan("dev"));
@@ -30,6 +31,7 @@ app.use('/api/user', userRouter)
 app.use('/api/list', listRouter)
 app.use('/api/question', questionRouter)
 app.use('/api/option', optionRouter)
+app.use('/api/path', pathRouter)
 
 app.listen(8000, () => {
     console.log(`http://localhost:8000`);
