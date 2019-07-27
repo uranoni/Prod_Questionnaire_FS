@@ -13,6 +13,7 @@ export default new Vuex.Store({
     nowQList: [],
     nowAList: [],
     nowPath: [],
+    pathID:"",
 
     next_question_id: ""
   },
@@ -31,6 +32,9 @@ export default new Vuex.Store({
     },
     addPath(state, payload) {
       state.nowPath.push(payload);
+    },
+    setPathID(state, pathId) {
+      state.pathID = pathId;
     }
   },
   actions: {

@@ -49,8 +49,13 @@ export default {
     }
     axios
       .get(`question/detail/${this.$route.params.id}`)
-      .then(res => {
+      .then(response => {
+        const res = response.data;
         console.log(res);
+        this.question_id = res._id;
+        this.Qname = res.Qname;
+        this.description = res.description;
+        this.option = res.ans_option;
       })
       .catch(err => {
         console.log(err);
@@ -77,21 +82,23 @@ export default {
     checkNext(option) {
       //問題的Item
       var choose_items1 = {
+        name: this.Qname,
         item_type: "question",
         item_id: this.$route.params.id
       };
       this.$store.commit("addPath", choose_items1);
       // 選項的Item
       var choose_items2 = {
+        name: option.option_name,
         item_type: "option",
         item_id: option._id
       };
-      this.$store.commit("addPath", choose_items1);
+      this.$store.commit("addPath", choose_items2);
 
       //判斷是否為底
       if (option.is_end == true) {
         const your_chose = {
-          list_info: this.$route.params.id,
+          list_info: this.$store.state.nowListID,
           choose_item: this.$store.state.nowPath
         };
         this.goEnd(your_chose);
@@ -100,21 +107,28 @@ export default {
       }
     },
     goNext(val) {
-      // console.log(val);
+      console.log(val);
       this.$router.push(`/answer/${val.next_que}`);
     },
     goEnd(your_chose) {
-      axios.post(
-        "path/create",
-        {
-          ...your_chose
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("Authorization")
+      axios
+        .post(
+          "path/create",
+          {
+            ...your_chose
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("Authorization")
+            }
           }
-        }
-      );
+        )
+        .then(res => {
+          this.$store.commit("setPathID", res.data._id);
+        })
+        .catch(err => {
+          console.log(err);
+        });
       this.$router.push("/result");
     }
   }
