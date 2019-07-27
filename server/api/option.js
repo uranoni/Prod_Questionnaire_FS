@@ -20,7 +20,9 @@ optionRouter.post("/create", async (req, res) => {
   ]);
   const keywords = req.body.keywords;
   body.keywords = keywords;
-  console.log(body);
+  if(Object.keys(body.next_que).length ==0  ){
+    body.next_que = null;
+  }
   try {
     var list = await List.findOne({ _id: req.body.list_id });
   } catch (error) {

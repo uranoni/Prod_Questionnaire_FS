@@ -13,6 +13,7 @@ pathRouter.post("/create", auth, async (req, res) => {
   body.user_info = req.user._id;
   try {
     var list = await List.findOne({ _id: req.body.list_info });
+    console.log(list);
     if (!list) {
       throw new Error("oops");
     }
@@ -30,5 +31,9 @@ pathRouter.post("/create", auth, async (req, res) => {
     return res.status(400).send(error);
   }
 });
-
+pathRouter.get("fetchpath", auth, async (req, res) => {
+  try {
+    const result = PathModel.findOne({ _id })
+  } catch (error) {}
+});
 module.exports = pathRouter;
