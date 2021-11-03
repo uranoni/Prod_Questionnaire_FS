@@ -20,6 +20,6 @@
     "morgan": "^1.9.1",
     "node-pre-gyp": "^0.13.0",
     "uuid": "^3.3.2",
-    "validator": "^11.1.0"
+    "validator": "^13.7.0"
   }
 }
